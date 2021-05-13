@@ -1,0 +1,485 @@
+$my-color: rgb(29, 158, 245);
+$my-bg: #3b78aa;
+///////////////////////
+@mixin pc {
+    @media screen and (min-width: 960px) {
+        @content;
+    }
+}
+
+@mixin tab {
+    @media screen and (max-width: 959px) {
+        @content;
+    }
+}
+@mixin sp {
+    @media screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+
+///////////////////////
+
+body {
+    font-family: 'Charter',sans-serif;
+    @include tab {
+        width: 100%;
+    }
+}
+
+.section-title {
+    display: inline-block;
+    font-size: 45px;
+    color: white;
+    border-bottom: 3px solid $my-color;
+    padding-bottom: 5px;
+    letter-spacing: 5px;
+    @include sp {
+        font-size: 28px;
+    }
+}
+
+
+header { 
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 19vh;
+    padding: 20px;
+    align-items: center;
+    z-index: 100;
+    @include sp {
+        position: fixed; 
+        padding: 10px;
+        height: 10vh;
+        background-color: rgb(1, 27, 48);
+    }
+    & .burger {
+        display: none;
+        cursor: pointer;
+        @include tab {
+            display: block;
+        }
+        & div {
+            
+            width: 25px;
+            height: 3px;
+            background-color: rgb(226, 226, 226);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+    }
+    .header-logo_container {
+        & img {
+            height: 50%; 
+            width: 60%;  
+            box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.7) ;
+            @include tab {
+                height: 30%;
+                width: 40%;
+            }
+        }
+    }
+    & .nav-links {
+        display: none;
+        width: 60%;
+        text-align: center;
+
+        @include sp {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+            
+        }
+        & a {
+            color: rgb(226, 226, 226);
+            text-decoration: none;
+            letter-spacing: 8px;
+            font-size: 30px;
+        }
+    }
+    & .list_nav {
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+        list-style: none;
+        align-items: center;
+        @include tab {
+            display: none;
+        }
+        & li {
+            font-size: 30px;
+            text-decoration: none;
+            color: white;
+            display: inline;
+
+            &:hover {
+                color: $my-color;
+                transition-duration: 0.4s;
+                transition-property: transform;
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+////////////////////////
+
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: rgb(1, 27, 48);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li {
+        opacity: 0;
+    }
+    .burger {
+        display: block;
+    }
+}
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2 {
+    opacity: 0;
+}
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+///////////////////////////////
+
+.first-vi {
+    width: 100%;
+    position: relative;
+    @include tab {
+        height: 110vh;
+    }
+    & .moon {
+        position: absolute;
+        top: 12%;
+        left: 12%;
+        width: 200px;
+        @include tab {
+            width: 170px;
+        }
+    }
+    &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to top, $my-bg, transparent);
+    }
+    &_title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 65px;
+        border-bottom: 4px solid $my-color;
+        padding-bottom: 5px;
+        @include tab {
+            font-size: 45px;
+        }
+        @include sp {
+            font-size: 60px;
+        }
+        & span {
+            @include sp {
+                color: $my-color;
+            }
+        }
+    }
+    &_container {
+    width: 100%;
+    height: 920px;
+        & img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.section_profile {
+    background-color: $my-bg;
+    text-align: center;
+    padding: 100px;
+    position: relative;
+    @include sp {
+        padding: 80px 30px;
+    }
+    & .profile-container {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 30px;
+        @include sp {
+            flex-direction: column;
+        }
+        & .profile-img {
+            width: 35%;
+            height: 500px;
+            @include sp {
+                height: 380px;
+                width: 100%;
+            }
+            & img {
+                width: 100%;
+                height: 100%;
+                box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.7) ;
+            }
+        }
+        & .profile-text_bx {
+            width: 50%;
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+            @include sp {
+                padding-top: 30px;
+                margin: 0 auto;
+                width: 100%;
+            }
+            & h3 {
+                color: white;
+                font-size: 45px;
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 2px;
+                @include sp {
+                    font-size: 20px;
+                }
+                &::after {
+                    content: "Shitamatsu Tatsuya";
+                    font-size: 15px;
+                }
+            }
+            & p {
+                color:white;
+                font-size: 19px;
+                line-height: 190%;
+            }
+        }
+    }   
+}
+
+.section_skills {
+    background-color: #000;
+    text-align: center;
+    padding: 80px;
+    @include sp {
+        padding: 30px;
+    }
+    & h3 {
+        position: absolute;
+        display: inline-block;
+        top: -13px;
+        left: 10px;
+        padding: 0 9px;
+        line-height: 1;
+        font-size: 25px;
+        background: black;
+        color: $my-color;
+        font-weight: bold;
+    }
+    & .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 80px 0;
+        & .skill-icon {
+            width: 32%;
+            @include sp {
+                width: 40%;
+            }
+        }
+        & .skill-bx {
+            width: 30%;
+            height: 400px;
+            padding: 40px 50px 0;
+            margin: 30px 0;
+            position: relative;
+            border: solid 3px $my-color;
+            border-radius: 8px;
+            @include sp {
+                width: 48%;
+                height: 310px;
+                padding: 30px 10px 0;
+            }
+            &_text {
+                text-align: center;
+                & p{
+                    width: 80%;
+                    margin: 0 auto;
+                    color: white;
+                    padding-top: 30px;
+                    line-height: 160%;
+                    @include sp {
+                        font-size: 14px;
+                        line-height: 140%;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.section_work {
+    background-color: $my-bg;
+    text-align: center;
+    padding: 100px;
+    @include sp {
+        padding: 30px;
+    }
+    & .work-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 30px 0;
+        & .work {
+            width: 30%;
+            height: 400px;
+            padding: 20px 20px 0;
+            margin: 30px 0;
+            position: relative;
+            border-radius: 8px;
+            @include sp {
+                width: 100%;
+                padding: 0 0 70px 0;
+            }
+            & p {
+                padding: 30px 0;
+                line-height: 160%;
+            }
+            & img {
+                height: 55%;
+                width: 100%;
+                @include sp {
+                    height: 80%;
+                }
+            }
+        }
+    }
+}
+
+.section_contact {
+    background-image: url(source/img/hut-3374201_1920.jpg);
+    background-size: cover;
+    height: 700px;
+    @include sp {
+        background-repeat: no-repeat;
+        background-position: -200px 0;
+    }
+    & .btn-container {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+        position: relative;
+    }
+}
+
+.btn-container {
+    max-width: 100vh;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // opacity: 0;
+}
+
+.border_slide_btn {
+    position: relative;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 60px;
+    @include sp {
+        font-size: 45px;
+    }
+  }
+  .border_slide_btn:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .border_slide_btn::after {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: $my-color;
+    transform: scale(0, 1);
+    transform-origin: right top;
+    transition: transform .3s;
+  }
+  .border_slide_btn:hover::after {
+    transform-origin: left top;
+    transform: scale(1, 1);
+  }
+
+
+footer {
+    max-width: 100%;
+    height: 70px;
+    background-color: rgba(32, 32, 32, 0.925);
+    & .list_nav {
+        max-width: 100%;
+        width: 60vh;
+        margin: 0 auto;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        & li {
+            font-size: 20px;
+            color: $my-color;
+            &:hover {
+                color: $my-color;
+                transition-duration: 0.1s;
+                transition-property: transform;
+                transform: scale(1.1);
+            }
+        }
+    }
+    & p {
+        text-align: center;
+    }
+}
